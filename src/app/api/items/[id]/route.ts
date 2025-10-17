@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import connectDB from '@/lib/mongodb';
 import LostItem from '@/models/LostItem';
 import User from '@/models/User';
+import { sendItemFoundNotification } from '@/lib/email';
 
 // GET single item
 export async function GET(
@@ -88,12 +89,44 @@ export async function PUT(
         );
       }
       
+      // Get the original poster's details before updating
+      await item.populate('reportedBy', 'name email');
+      const originalPoster = item.reportedBy as any;
+      
       item.status = 'claimed';
       item.claimedBy = user._id;
       await item.save();
       
-      await item.populate('reportedBy', 'name email');
       await item.populate('claimedBy', 'name email');
+      
+      // Send email notification if someone found a lost item
+      if (item.status === 'claimed') {
+        try {
+          // Format the date for display
+          const formattedDate = new Date(item.dateLost).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          
+          await sendItemFoundNotification(
+            originalPoster.email,           // Owner's email
+            originalPoster.name,            // Owner's name
+            user.name || 'KLH Student',     // Finder's name
+            user.email,                     // Finder's email
+            item.contactInfo,               // Contact info from the item
+            item.title,                     // Item title
+            item.description,               // Item description
+            item.location,                  // Location where found/lost
+            formattedDate                   // Formatted date
+          );
+          
+          console.log(`Email notification sent to ${originalPoster.email} about found item: ${item.title}`);
+        } catch (emailError) {
+          console.error('Failed to send email notification:', emailError);
+          // Don't fail the claim if email fails - just log it
+        }
+      }
       
       return NextResponse.json(item);
     }

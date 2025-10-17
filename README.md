@@ -8,7 +8,8 @@ A comprehensive Lost and Found platform exclusively for KLH University students,
 - 📝 **Post Lost Items**: Students can report lost items with descriptions, images, and location details
 - 🔍 **Search & Filter**: Advanced search and filtering by category, status, and keywords
 - 🏷️ **Claim Items**: Students can claim lost items found by others
-- 📱 **Responsive Design**: Works seamlessly on desktop and mobile devices
+- � **Email Notifications**: Automatic email alerts when lost items are found
+- �📱 **Responsive Design**: Works seamlessly on desktop and mobile devices
 - ☁️ **Cloud Storage**: Images stored securely using Cloudinary
 - 🚀 **Live Deployment**: Deployed on Vercel for optimal performance
 
@@ -50,6 +51,10 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret_here
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+# Email Configuration (Gmail)
+EMAIL_USER=your_gmail@gmail.com
+EMAIL_APP_PASSWORD=your_16_char_app_password
 ```
 
 ### Setup Instructions
