@@ -1,15 +1,13 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground: #1f2937;
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+  --font-sans: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-mono: 'Courier New', monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +20,75 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve text visibility */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+p {
+  color: #374151;
+  font-weight: 400;
+}
+
+.text-sm {
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+}
+
+.text-lg {
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+}
+
+.text-xl {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+/* Button text improvements */
+button {
+  font-weight: 500 !important;
+}
+
+/* Input and form elements text improvements */
+input, textarea, select {
+  font-weight: 400 !important;
+  color: #111827 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Dropdown/Select specific improvements */
+select {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+  background-color: white !important;
+}
+
+select option {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #111827 !important;
+  background-color: white !important;
+  padding: 8px 12px !important;
+}
+
+/* Improve option visibility on hover/focus */
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: #e5e7eb !important;
+  color: #111827 !important;
 }
